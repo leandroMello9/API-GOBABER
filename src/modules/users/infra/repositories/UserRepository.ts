@@ -3,6 +3,11 @@ import UserModel from '../typeorm/entities/User';
 import IUserRepository from '../../repositoriesInterface/IUserRepository';
 import IUserCreateInterfaceDTO from '../../dtos/ICreateUserDTO';
 
+interface IRequestDTO {
+  id: string;
+  email: string;
+  name: string;
+}
 class UserRepository implements IUserRepository {
   private ormRepository: Repository<UserModel>;
 
@@ -14,6 +19,10 @@ class UserRepository implements IUserRepository {
     const user = await this.ormRepository.findOne(id);
     return user;
   }
+
+ 
+
+
 
   public async create({
     name,
@@ -31,7 +40,7 @@ class UserRepository implements IUserRepository {
 
   public async findByEmail(email: string): Promise<UserModel | undefined> {
     const user = await this.ormRepository.findOne({
-      where: email,
+      email,
     });
     return user;
   }

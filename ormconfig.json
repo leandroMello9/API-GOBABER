@@ -1,11 +1,11 @@
 {
 
   "type": "postgres",
-  "host": "192.168.99.100",
+  "host": "localhost",
   "port": 5432,
   "username": "postgres",
-  "password": "docker",
-  "database": "gostack_gobaber",
+  "password": "102030",
+  "database": "gobaber",
   "entities": [
     "./src/modules/**/infra/typeorm/entities/*.ts"
  ],

@@ -1,8 +1,9 @@
 {
     "env": {
         "es6": true,
-        "node": true
-    },
+        "node": true,
+        "jest": true
+   },
     "extends": [
         "airbnb-base",
         "plugin:@typescript-eslint/recommended",
@@ -26,6 +27,8 @@
     "rules": {
       "prettier/prettier": "error",
       "class-methods-use-this": "off",
+      "consistent-return": "off",
+      "no-shadow": "off",
       "@typescript-eslint/interface-name-prefix": ["error",{"prefixWithI": "always"}],
       "@typescript-eslint/camelcase":"off",
       "import/extensions": [
