@@ -1,13 +1,9 @@
 import { Repository, getRepository } from 'typeorm';
-import UserModel from '../typeorm/entities/User';
-import IUserRepository from '../../repositoriesInterface/IUserRepository';
-import IUserCreateInterfaceDTO from '../../dtos/ICreateUserDTO';
+import UserModel from '../entities/User';
+import IUserRepository from '@modules/users/repositoriesInterface/IUserRepository';
+import IUserCreateInterfaceDTO from '../../../dtos/ICreateUserDTO';
 
-interface IRequestDTO {
-  id: string;
-  email: string;
-  name: string;
-}
+
 class UserRepository implements IUserRepository {
   private ormRepository: Repository<UserModel>;
 

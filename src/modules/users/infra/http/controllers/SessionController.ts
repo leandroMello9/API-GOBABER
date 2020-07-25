@@ -21,7 +21,11 @@ class SessionController {
           email,
           password,
         });
-        return response.json({ userAuthenticate, token });
+        const user = {
+          ...userAuthenticate,
+          token
+        }
+        return response.json(user);
       }
     } catch (err) {
       return response.status(400).json({ message: err.message });

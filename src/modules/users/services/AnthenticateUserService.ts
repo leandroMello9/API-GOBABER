@@ -3,8 +3,8 @@ import { sign } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
 import UserModel from '../infra/typeorm/entities/User';
 import authConfig from '../../../config/auth';
-import IUserRepository from '../infra/repositories/UserRepository';
-
+import IUserRepository from '../repositoriesInterface/IUserRepository';
+import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider'
 interface IRequest {
   email: string;
   password: string;
@@ -15,10 +15,13 @@ interface IReponse {
 }
 @injectable()
 class AuthemticateUserService {
-  private repository: IUserRepository;
 
-  constructor(@inject('UsersRepository') repository: IUserRepository) {
-    this.repository = repository;
+  constructor(
+    @inject('UsersRepository')
+    private repository: IUserRepository,
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
+  ) {
   }
 
   public async execute({ email, password }: IRequest): Promise<IReponse> {
@@ -30,7 +33,7 @@ class AuthemticateUserService {
     // password = senha não criptografada
 
     // Comparando
-    const passwordMathecd = await compare(password, user.password);
+    const passwordMathecd = await this.hashProvider.compareHash(password, user.password);
     // Validando senha
     if (!passwordMathecd) {
       throw new Error('Incorrect email/password, check your data');

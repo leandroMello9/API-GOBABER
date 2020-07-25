@@ -15,10 +15,6 @@ class UserRepository implements IUserRepository {
     const user = this.users.find(user => user.email === email)
     return user;
   }
-
-
-
-
   public async create({
     name,
     email,
